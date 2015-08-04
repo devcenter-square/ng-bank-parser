@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ng/bank/parser/version'
+require 'ng-bank-parser/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "ng-bank-parser"
-  spec.version       = Ng::Bank::Parser::VERSION
+  spec.version       = NgBankParser::VERSION
   spec.authors       = ["Opemipo Aikomo"]
   spec.email         = ["opemipoaikomo@gmail.com"]
 
