@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'date'
 
 class Hash
   def without(*keys)
