@@ -18,7 +18,7 @@ module NgBankParser
 
 			@file = Nokogiri::HTML(open(path))
 			rows = @file.xpath('//table[@id="dgtrans"]/tr')
-			rows.shift
+			rows.shift # Remove header row
 
 	        transactions = rows.collect do |row|
 				transaction = {}
