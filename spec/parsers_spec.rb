@@ -21,7 +21,8 @@ describe "Every Parser" do
 				:name => an_instance_of(String),
 				:format => an_instance_of(String),
 				:valid => an_instance_of(String),
-				:invalid => an_instance_of(String)
+				:invalid => an_instance_of(String),
+				:extensions => an_instance_of(Array)
         	})
 		end
 	end
@@ -31,7 +32,12 @@ describe "Every Parser" do
 			path = "lib/ng-bank-parser/parsers/" + filename
 			
 			expect(File).to exist(path), "Didnt find #{filename} in the parsers folder"
-			expect(File).to exist(path), "Didnt find #{filename} in the parsers folder"
+		end
+	end
+	it "has test files" do
+		subject.each do |parser|			
+			expect(File).to exist(parser[:valid]), "Valid file path is wrong. Please check"
+			expect(File).to exist(parser[:invalid]), "Invalid file path is wrong. Please check"
 		end
 	end
 end
