@@ -42,7 +42,7 @@ $Parsers.each do |parser|
 		class_object = NgBankParser.const_get(class_name)
 
 		context "with invalid statement" do
-			response = class_object.parse("invalid")
+			response = class_object.parse(parser[:invalid])
 
 			it "returns proper response" do
 				expect(response[:status]).to eq(0);
@@ -50,7 +50,7 @@ $Parsers.each do |parser|
 		end
 
 		context "with valid statement" do
-			response = class_object.parse("valid")
+			response = class_object.parse(parser[:valid])
 
 			it "parses statement correctly" do
 				expect(response[:status]).to eq(1)

@@ -4,8 +4,8 @@ module NgBankParser
 			key: "gtb",
 			format: "xls",
 			name: "Guaranty Trust Bank",
-			valid: "",
-			invalid: ""
+			valid: "valid",
+			invalid: "invalid"
 		}]
 	end
 end
