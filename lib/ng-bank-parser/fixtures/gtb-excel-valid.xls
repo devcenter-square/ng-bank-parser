@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><title>
+	Untitled Page
+</title></head>
+<body>
+    <form name="form1" method="post" action="Usercontrols/AccountStmtExport.aspx" id="form1">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+
+    <div>
+        <table width="100%">
+            <tr>
+                <td colspan="3">
+                    <table width="100%">
+                        <tr>
+                            <td colspan="3" style="text-align: center; font-weight: bold; font-size: 12pt; color: green; font-family: Verdana;" width="60%">
+                                GUARANTY TRUST BANK PLC<br />
+                                <br />
+                                CUSTOMER STATEMENT<br />
+                                <br />
+                                <span id="lblAcctName" style="color:Black;">SAMPLE EXCEL SHEET</span><br />
+                            </td>
+                            <td colspan="1" style="text-align: left" width="40%">
+                                <img id="Image1" src="Images/glogo.gif" border="0" /></td>
+                        </tr>
+                    </table>
+                    <table width="500">
+                        <tr>
+                            <td colspan="2">
+                                Print Date:
+                                <span id="lblDate">28/Jul/2015</span></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 20px" width="25%">
+                            </td>
+                            <td style="height: 20px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Address:
+                                <span id="lblAddress">DEPT OF COMPTR SCI & ENGR,FAC OF TECH,OAU,ILE-IFE.</span></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 20px" width="25%">
+                            </td>
+                            <td style="height: 20px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Account No:
+                                <span id="lblAcctNo">0037529546 - (492/445744/1/59/0)</span></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 20px" width="25%">
+                            </td>
+                            <td style="height: 20px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 20px" width="25%" colspan="2">
+                                Currency:<span id="lblCurrency">Naira</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 20px" width="25%">
+                                &nbsp;</td>
+                            <td style="height: 20px">
+                                &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Period:
+                                <span id="lblPeriod1">05/Jan/2015      To</span>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                                <span id="lblPeriod2">28/Jul/2015</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="height: 20px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 21px" colspan="2">
+                                <span id="lblOpenBal">Opening Balance: 69,117.51</span></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table width="849">
+                        <tr>
+                            <td colspan="3">
+                                <table cellspacing="0" cellpadding="3" border="0" id="dgtrans" style="font-family:Verdana;height:141px;width:849px;border-collapse:collapse;">
+	<tr nowrap="nowrap" valign="top" style="color:Green;font-size:X-Small;font-weight:bold;height:18px;">
+		<td style="width:10%;">Trans Date</td><td style="width:10%;">Reference</td><td style="width:10%;">Value Date</td><td align="right" style="width:10%;">Debit</td><td align="right" style="width:10%;">Credit</td><td align="right" style="font-weight:bold;font-style:normal;text-decoration:none;width:10%;">Balance</td><td style="width:30%;">Remarks</td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>0</td><td>05-Jan-2015</td><td align="right">2,000.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">67,117.51</td><td>Airtime Purchase USSD-101CT0000000000028348776_USSD</td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>9999672732</td><td>05-Jan-2015</td><td align="right">1,000.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">66,117.51</td><td>POINT OF SALE PURCHASE TRANSACTION  635557497423230000     www.swiftng.cLANG- </td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>0</td><td>05-Jan-2015</td><td align="right">7,000.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">59,117.51</td><td>NIBSS Instant Payment Outward 058214150102133237418053496319   from  AIKOMO  ONAOPEMIPO TEMITAYO</td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>0</td><td>05-Jan-2015</td><td align="right">105.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">59,012.51</td><td>COMMISSION 058214150102133237418053496319 </td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>0</td><td>05-Jan-2015</td><td align="right">5.25</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">59,007.26</td><td>COMMISSION 058214150102133237418053496319 </td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>9999457698</td><td>05-Jan-2015</td><td align="right">10,000.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">49,007.26</td><td>CASH WITHDRAWAL FROM OTHERS ATM  PRESTIGE GRA ATM 2     IKEJA          NG- </td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>0</td><td>05-Jan-2015</td><td align="right">500.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">48,507.26</td><td>Airtime Purchase USSD-101CT0000000000028584579_USSD</td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>9999721078</td><td>05-Jan-2015</td><td align="right">500.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">48,007.26</td><td>POINT OF SALE PURCHASE TRANSACTION  635559237798525480     www.swiftng.cLANG- </td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>9999739456</td><td>05-Jan-2015</td><td align="right">1,000.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">47,007.26</td><td>POINT OF SALE PURCHASE TRANSACTION  635560017547280000     www.swiftng.cLANG- </td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>0</td><td>05-Jan-2015</td><td align="right">4,500.00</td><td align="right">&nbsp;</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">42,507.26</td><td>TRANSFER BETWEEN CUSTOMERS MBANKING -  ANY Account Transfer   from AIKOMO  ONAOPEMIPO TEMITAYO  to  AIKOMO, ODUNOLA MOTUNRAYO O.</td>
+	</tr><tr nowrap="nowrap" style="color:Black;background-color:White;font-family:Verdana;font-size:X-Small;">
+		<td>05-Jan-2015</td><td>0</td><td>05-Jan-2015</td><td align="right">&nbsp;</td><td align="right">67,500.00</td><td align="right" style="font-weight:normal;font-style:normal;text-decoration:none;">110,007.26</td><td>TRANSFER BETWEEN CUSTOMERS via Internet Banking money for 12 pounds of stolen cuban cocaine  from OLADAPO-OGUNSANYA, SEGUN  to  AIKOMO  ONAOPEMIPO TEMITAYO</td>
+	</tr>
+</table></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="font-weight: bold; font-size: 10pt; color: green; font-family: Verdana">
+                                PLEASE ADDRESS ALL ENQUIRIES TO</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="font-weight: bold; font-size: 10pt; color: green; font-family: Verdana">
+                                GUARANTY TRUST BANK PLC</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="font-weight: bold; font-size: 10pt; color: green; font-family: Verdana">
+                                SYSTEMS AND CONTROL GROUP</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="font-weight: bold; font-size: 10pt; color: green; font-family: Verdana">
+                                178, AWOLOWO ROAD, IKOYI</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="font-weight: bold; font-size: 10pt; color: green; font-family: Verdana;
+                                height: 17px">
+                                P.O.BOX 75455, VICTORIA ISLAND, LAGOS, NIGERIA</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="font-weight: bold; font-size: 10pt; color: green; font-family: Verdana">
+                                PHONE&nbsp; 01-2694276&nbsp; FAX&nbsp; 01-2694276</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="font-weight: bold; font-size: 10pt; color: green; font-family: Verdana">
+                                OR THE CUSTOMER INFORMATION UNIT OF YOUR LOCAL BRANCH</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    
+    </div>
+    </form>
+</body>
+</html>

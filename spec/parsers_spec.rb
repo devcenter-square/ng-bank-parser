@@ -68,10 +68,10 @@ $Parsers.each do |parser|
 	        	response[:data][:transactions].each do |row|
 	        		expect(row).to match({
 						:date => an_instance_of(Date),
-						:type => a_string_matching(/^(credit|debit)$/),
-						# :type => an_instance_of(String),
-						:amount => an_instance_of(Fixnum),
 						:ref => an_instance_of(String),
+						:type => a_string_matching(/^(credit|debit)$/),
+						:amount => an_instance_of(Float),
+						:balance => an_instance_of(Float),
 						:remarks => an_instance_of(String)
 		        	})
 	        	end
