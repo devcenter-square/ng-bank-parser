@@ -48,7 +48,7 @@ $Banks.each do |bank|
 
 			context "has required files" do
 				it "has parser file" do
-					filename = key + "-" + parser[:format] + "-parser.rb"
+					filename = bank[:key] + "-" + parser[:format] + "-parser.rb"
 					path = "lib/ng-bank-parser/parsers/" + filename
 					
 					expect(File).to exist(path), "Didnt find #{filename} in the parsers folder"
