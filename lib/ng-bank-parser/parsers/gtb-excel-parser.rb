@@ -9,7 +9,7 @@ class Hash
 end
 
 module NgBankParser
-	class GtbXls
+	class GtbExcel
 		def self.parse(path)
 			accepted_formats = [".xls"];
 			unless accepted_formats.include? File.extname(path)
