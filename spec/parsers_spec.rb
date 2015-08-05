@@ -41,11 +41,20 @@ $Parsers.each do |parser|
 		class_name= parser[:key].capitalize + parser[:format].capitalize;
 		class_object = NgBankParser.const_get(class_name)
 
+		context "with invalid statement" do
+			response = class_object.parse("invalid")
+
+			it "returns proper response" do
+				expect(response[:status]).to eq(0);
+			end
+		end
+
 		context "with valid statement" do
-			valid_response = class_object.parse()
+			response = class_object.parse("valid")
 
 			it "parses statement correctly" do
-				expect(valid_response).to match({
+				expect(response[:status]).to eq(1)
+				expect(response[:data]).to match({
 					:bank_name => an_instance_of(String),
 					:account_number => an_instance_of(String),
 					:account_name => an_instance_of(String),
@@ -56,7 +65,7 @@ $Parsers.each do |parser|
 			end
 
 			it "returns valid transactions" do
-	        	valid_response[:transactions].each do |row|
+	        	response[:data][:transactions].each do |row|
 	        		expect(row).to match({
 						:date => an_instance_of(Date),
 						:type => a_string_matching(/^(credit|debit)$/),
