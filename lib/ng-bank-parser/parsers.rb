@@ -5,8 +5,7 @@ module NgBankParser
 			format: "xls",
 			name: "Guaranty Trust Bank",
 			valid: "",
-			invalid: "",
-			empty: ""
+			invalid: ""
 		}]
 	end
 end
