@@ -5,7 +5,8 @@ module NgBankParser
 			format: "xls",
 			name: "Guaranty Trust Bank",
 			valid: "lib/ng-bank-parser/fixtures/gtb-excel-valid.xls",
-			invalid: "lib/ng-bank-parser/fixtures/gtb-excel-invalid.xlsx"
+			invalid: "lib/ng-bank-parser/fixtures/gtb-excel-invalid.xlsx",
+			extensions: ["xls"]
 		}]
 	end
 end
