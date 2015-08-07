@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
 
   spec.add_dependency "nokogiri"
+  spec.add_dependency "pdf-reader-turtletext"
 end
