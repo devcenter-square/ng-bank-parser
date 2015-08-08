@@ -10,8 +10,6 @@ module NgBankParser
     #The variable that holds the location index for a searched bank in the Bank hash
     @value
     
-
-    private
     
     #this takes our bank parser along with the bank name supplied from the payload so as to compare
     #and see if the file extension is available for that bank
@@ -27,6 +25,9 @@ module NgBankParser
         parser_picker(filename)
       end      
     end
+
+
+    private
 
     #this uses the extension in the file of the uploaded payload to check support in @file_extension_array
     #and goes on to pick the parser to use for the operation
