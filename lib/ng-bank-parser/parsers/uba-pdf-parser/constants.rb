@@ -1,0 +1,32 @@
+module NgBankParser
+  module Constants
+    ACCEPTED_FORMATS = ['.pdf']
+
+    TABLE_HEADER_LINE_INDEX = 6
+    LENGTH_OF_TRANSACTION_DATE_STRING = 10
+    ACCOUNT_NAME_LINE_INDEX = 2
+    ACCOUNT_NUMBER_LINE_INDEX = 5
+    RANGE_OF_LINES_WITH_TRANSACTIONS = 7..-3
+
+
+    FIRST_LINE_CHECKER_STRING = 'statementoftransactions'
+    START_DATE_STRING = 'startdate:'
+    END_DATE_STRING = 'enddate:'
+    ACCOUNT_NUMBER_STRING = 'accountnumber:'
+    CURRENCY_STRING = 'currency'
+    ACCOUNT_NAME_START_MARKER = '( '
+    ACCOUNT_NAME_END_MARKER = ' )'
+
+
+    DATE_COLUMN_HEADER_STRING = 'date'
+    REMARKS_COLUMN_HEADER_STRING = 'description'
+    CHEQUE_NUMBER_COLUMN_HEADER_STRING = 'chq. no'
+    VAL_DATE_COLUMN_HEADER_STRING = 'val date'
+    DEBIT_COLUMN_HEADER_STRING = 'debit'
+    CREDIT_COLUMN_HEADER_STRING = 'credit'
+    BALANCE_COLUMN_HEADER_STRING = 'balance'
+
+    COLUMN_OFFSET_RANGE = 0..-2
+    INVALID_FILE_STRING = 'Invalid File'
+  end
+end
