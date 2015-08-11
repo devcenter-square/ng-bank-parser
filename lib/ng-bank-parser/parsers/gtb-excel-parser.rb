@@ -1,78 +1,66 @@
-require 'nokogiri'
-require 'date'
-
-class Hash
-  def without(*keys)
-    cpy = self.dup
-    keys.each { |key| cpy.delete(key) }
-    cpy
-  end
-end
+require_relative 'gtb-excel-parser/helpers'
 
 module NgBankParser
 	class GtbExcel
-		def self.parse(path)
-			accepted_formats = [".xls"];
-			unless accepted_formats.include? File.extname(path)
-				return { status: 0, message: "Invalid file format" }
+		extend GtbExcelHelpers
+
+		class << self
+			def parse(path)
+				accepted_formats = [".xls",".xlsx"];
+				unless accepted_formats.include? File.extname(path)
+					return error_message("Invalid file format")
+				end
+
+				file = read_file_contents(path)
+				if (file[:type] == "html")
+					html_parse(file[:contents])
+				elsif (file[:type] == "xls")
+					xls_parse(file[:contents])
+				else
+					return error_message("Could not parse this file")
+				end
 			end
 
-			@file = Nokogiri::HTML(open(path))
-			rows = @file.xpath('//table[@id="dgtrans"]/tr')
-			rows.shift # Remove header row
+			def html_parse(file)
+				data = {}
 
-	        transactions = rows.collect do |row|
-				transaction = {}
-				[
-					[:date, 'td[1]/text()'], #date
-					[:ref, 'td[2]/text()'], #ref
-					[:debit, 'td[4]/text()'], #debit
-					[:credit, 'td[5]/text()'], #credit
-					[:balance, 'td[6]/text()'], #balance
-					[:remarks, 'td[7]/text()'], #remarks
-				].each do |name, xpath|
-					integers = [:debit, :credit, :balance]
-					val = row.at_xpath(xpath).text()
+		        data[:transactions] = get_transactions_from_html(file)
+		        data[:account_number] = file.css("#lblAcctNo").text().return_first_number
+		        data[:from_date] = file.css("#lblPeriod1").text().convert_to_date
+		        data[:to_date] = file.css("#lblPeriod2").text().convert_to_date
+		        data[:account_name] = file.css("#lblAcctName").text()
+		        data[:bank_name] = "Guaranty Trust Bank"
 
-					if integers.include?(name)
-						val = val.to_s.scan(/\b-?[\d.]+/).join.to_f
-					end
-					
-					transaction[name] = val
+		       	send_response(data)
+			end
 
-					if (name == :date)
-						transaction[:date] =  Date.strptime(val,"%d-%b-%Y")
-					end
-				end
-	            
-				if (transaction[:debit].nil? || transaction[:debit] == 0)
-					transaction[:type] = "credit"
-					transaction[:amount] = transaction[:credit]
-				else
-					transaction[:type] = "debit"
-					transaction[:amount] = transaction[:debit]
-				end
+			def xls_parse(file)
+				data = {}
 
-	        	transaction.without(:debit, :credit)
-	        end
+				data[:transactions] = get_transactions_from_excel(file)
+		        data[:account_number] = file.row(10)[0].return_first_number
+		        date_strings = file.row(14)[0].get_date_strings
+		        data[:from_date] = date_strings[0].convert_to_date
+		        data[:to_date] = date_strings[1].convert_to_date
+		        data[:account_name] = file.row(5)[0]
+		        data[:bank_name] = "Guaranty Trust Bank"
 
-	        @account = @file.css("#lblAcctNo").text().scan(/\d+/)[0]
-	        dateString = @file.css("#lblPeriod1").text() + @file.css("#lblPeriod2").text()
-	        @dates = dateString.scan(/.....\d*..\d{4}/)
-	        @name = @file.css("#lblAcctName").text()
-	        @address = @file.css("#lblAddress").text()
+				send_response(data)
+			end
 
-			return {
-				status: 1,
-				data: {
-					bank_name: "Guaranty Trust Bank",
-					account_number: @account,
-					account_name: @name,
-					from_date: Date.strptime(@dates[0],"%d/%b/%Y"),
-					to_date: Date.strptime(@dates[1],"%d/%b/%Y"),
-					transactions: transactions
+			def error_message(text)
+				return { 
+					status: 0, 
+					message: text
 				}
-			}
+			end
+
+			def send_response(data)
+				return {
+					status: 1,
+					data: data
+				}
+			end
 		end
 	end
 end
