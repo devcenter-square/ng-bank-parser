@@ -1,8 +1,10 @@
 require 'pdf-reader-turtletext'
 require 'date'
+require_relative 'firstbank-pdf-parser/helpers'
 
 module NgBankParser
 	class FirstbankPdf
+		extend Helpers
 		@@transactions = []
 		def self.parse(path)
 			accepted_formats = [".pdf"];
@@ -10,63 +12,41 @@ module NgBankParser
 				return { status: 0, message: "Invalid file format" }
 			end
 
-			begin
-				reader = PDF::Reader::Turtletext.new(path)
-				page_count = PDF::Reader.new(path).page_count
-			rescue PDF::Reader::EncryptedPDFError
-				return { status: 0, message: "PDF File is Encrypted." }
+			if has_encryption? path 
+				return { status: 0, message: "Invalid file format" }
+			end 
+
+			if contains_account_data?
+				@@account_name = get_account_name
+				@@account_number = get_account_number
+				@@last_balance = get_last_balance
+				@@from_date, @@to_date = get_statement_period
+			else
+				return { status: 0, message: "Invalid file format" }
 			end
 
-			raw_transactions = [[]]
-			
-			# section of pdf that contains general data like account number, 
-			# account name, opening balance and time period
-			data = reader.bounding_box do
-				page 1
-				above "Withdrawal"
-			end
-			data.text.each_with_index do |item , index|
-				unless item.length == 1 #if length is 1, it's probably an array with an empty string
-					if item[0] and item[0].start_with? 'Account No'
-						@@account_number = item[1]
-					elsif item[0] and item[0].start_with? 'Account Type'
-						@@last_balance = item[3].to_i
-					elsif item[0] and item[0].start_with? 'Account Name'
-						@@account_name = item[1]
-					elsif item[0] and item[0].start_with? 'For the Period of'
-						date_range = item[1]
-						@@from_date = date_range.split('to')[0].strip
-						@@to_date = date_range.split('to')[1].strip
-					else
-						next
-					end
-				end
-			end
-			return { status: 0, message: "Unable to parse file" } if @@account_number.nil? || @@last_balance.nil?
-			
-			(1...page_count).each do |page_num|
-				# section of pdf that contains the table of
-				# transactions
-				rows = reader.bounding_box do
-					page page_num
-					below "TransDate"
-				end
-				raw_transactions += rows.text
+			unless @@account_name && @@account_number && @@last_balance
+				return { status: 0, message: "Invalid file format" }
 			end
 			
-			extract_transactions(clean(raw_transactions))
-			File.open('transactions.txt', 'w') { |file| file.write(@@transactions) }
-			return {
-				status: 1,
-				data: {
-					bank_name: "First Bank",
-					account_number: @@account_number,
-					account_name: @@account_name,
-					from_date: Date.strptime(@@from_date,"%d-%b-%Y"),
-					to_date: Date.strptime(@@to_date,"%d-%b-%Y"),
-					transactions: @@transactions
+			raw_transactions = get_all_transaction_rows
+			if contains_transactions_table?
+				extract_transactions(clean(raw_transactions))
+				File.open('transactions.txt', 'w') { |file| file.write(@@transactions) }
+				return {
+					status: 1,
+					data: {
+						bank_name: "First Bank",
+						account_number: @@account_number,
+						account_name: @@account_name,
+						from_date: Date.strptime(@@from_date.strip,"%d-%b-%Y"),
+						to_date: Date.strptime(@@to_date.strip,"%d-%b-%Y"),
+						transactions: @@transactions
 				}
 			}
+			else
+				return { status: 0, message: "Invalid file format" }
+			end
 		end
 
 
