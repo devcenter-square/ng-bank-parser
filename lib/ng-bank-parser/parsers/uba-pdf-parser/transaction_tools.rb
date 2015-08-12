@@ -76,7 +76,7 @@ module NgBankParser
         }
         @val_date_column = {
             start: column_header_line.index(VAL_DATE_COLUMN_HEADER_STRING),
-            end: column_header_line.index(DATE_COLUMN_HEADER_STRING)
+            end: column_header_line.index(VAL_DATE_COLUMN_HEADER_STRING) + LENGTH_OF_TRANSACTION_DATE_STRING
         }
         @debit_column = {
             start: @val_date_column[:start] + LENGTH_OF_TRANSACTION_DATE_STRING,
