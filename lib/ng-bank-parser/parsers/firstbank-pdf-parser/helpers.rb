@@ -1,7 +1,7 @@
 require 'pdf-reader-turtletext'
 
 module NgBankParser
-	module Helpers
+	module FirstbankPdfHelpers
 
 		@@pdf_reader = nil
 		@@pdf_page_count = nil
@@ -10,7 +10,6 @@ module NgBankParser
 
 		def has_encryption? path
 			begin
-				#@@file = path
 				@@pdf_reader = PDF::Reader::Turtletext.new(path)
 				@@pdf_page_count = PDF::Reader.new(path).page_count
 				false
@@ -55,7 +54,7 @@ module NgBankParser
 			get_account_data_section
 		end
 
-		
+
 		def get_account_number
 			@@account_data.each do |data_item|
 				return data_item[1] if data_item[0].start_with? 'Account No'
@@ -81,6 +80,35 @@ module NgBankParser
 			@@account_data.each do |data_item|
 				return data_item[1].split('to') if data_item[0].start_with? 'For the Period of'
 			end
+		end
+
+
+		def is_transaction_row? row
+			 row[0] =~ /(\d\d-[a-zA-Z]{3}-\d\d)/
+		end
+
+
+		def is_row_invalid? row
+			row.length == 0 ||
+			row[0].start_with?('END OF STATEMENT') ||
+			row[0] == ('Balance B/F') ||
+			row[0].start_with?('Page')
+		end
+
+
+		def error_message msg
+			return {
+					status: 0,
+					message: msg
+				}
+		end
+
+
+		def send_response data
+			return {
+					status: 1,
+					data: data
+				}
 		end
 	end
 end

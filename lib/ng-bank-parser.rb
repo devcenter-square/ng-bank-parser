@@ -5,5 +5,4 @@ require_relative "ng-bank-parser/parsers/firstbank-pdf-parser"
 
 module NgBankParser
   # Your code goes here...
-  FirstbankPdf.parse('ng-bank-parser/fixtures/firstbank-pdf-valid.pdf' 	)
 end
