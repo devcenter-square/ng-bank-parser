@@ -1,48 +1,35 @@
 require 'spec_helper'
 
 describe "Router" do
-	before :all do
-		$Banks.each.with_index do |bank, index|
-			@bank_name = bank[:key]
-			@value =  bank[:key] = index
 
-			bank[:parsers].each do |parser|
-				@format = parser[:format]
-				@extension = parser[:extensions].reduce(:concat)
-				@extension_array = parser[:extensions]
-				@valid = parser[:valid]
-			end
+	context "router variables exist" do
+		it "checks if bank name is not empty" do
+			expect(:bank_name).not_to equal(nil), "bank name should not be empty"
+		end
+
+		it "checks if file path is not empty" do
+			expect(:path).not_to equal(nil), "file path should not be empty"
 		end
 	end
 
-	context "router" do
-		it "checks if index value is not nil" do					
-			expect(@value).not_to equal(nil)
+	context "has file extension" do
+	    key = $Banks.map { |e| e[:key].capitalize }
+      	format = $Banks.map { |e| e[:parsers].map { |e| e[:format].capitalize }}
+      	class_name = key + format.reduce(:concat)
+      	array = []
+
+		it "is supported" do
+			class_object = NgBankParser.const_get(class_name.reduce(:concat))			
+			response = class_object.parse(:path.to_s)
+
+			expect(response[:status]).to eq(0);
 		end
 
-		it "adds extension to array using index value" do			
-			@extension_array += $Banks[@value][:parsers].map {|e| e[:extensions]}
+		it "is not supported" do
+			extension_name = File.extname(:path.to_s)
 
-			expect(@extension_array).not_to match_array([])
-		end		
-	end
-
-	context "parser_picker" do
-		it "checks file extension in array" do
-			filename = @bank_name + "-" + @format + "-valid" + ".#{@extension}"
-			extension_name = File.extname(filename).delete(".")
-
-			expect(@extension_array).to include(extension_name)
+			expect(array).not_to include(extension_name) 
 		end
 	end
 
-	context "ng_bank_parsers" do
-		it "builds parser that exists and works for file" do
-			class_name = @bank_name.capitalize + @format.capitalize
-			class_object = NgBankParser.const_get(class_name)
-			response = class_object.parse(@valid)
-
-			expect(response[:status]).to eq(1);
-		end
-	end
 end
