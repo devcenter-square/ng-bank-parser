@@ -43,7 +43,7 @@ module GtbExcelHelpers
 	end
 
 	def has_transactions_table(contents)
-		contents.css("#lblAcctNo")		
+		contents.css("#dgtrans")		
 	end
 
 	def get_transactions_from_html(file)
