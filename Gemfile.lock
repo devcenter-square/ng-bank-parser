@@ -4,7 +4,6 @@ PATH
     ng-bank-parser (0.1.0)
       activesupport
       nokogiri
-      pdf-reader
       pdf-reader-turtletext
       roo
 
