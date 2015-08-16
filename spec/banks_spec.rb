@@ -71,7 +71,6 @@ $Banks.each do |bank|
 
 			context "with valid statement" do
 				response = class_object.parse(valid_file_path)
-				puts response
 
 				it "parses statement correctly" do
 					expect(response[:status]).to eq(1)

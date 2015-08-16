@@ -49,7 +49,7 @@ module NgBankParser
       end
 
       def set_bank_name
-        @bank_name = "United Bank for Africa (UBA)"
+        @bank_name = "United Bank for Africa"
       end
 
       def set_account_name
@@ -72,7 +72,6 @@ module NgBankParser
 
 
       def return_payload
-
         return {
             status: 1,
             data: {

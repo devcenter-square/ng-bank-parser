@@ -26,8 +26,8 @@ module NgBankParser
 
 		        data[:transactions] = get_transactions_from_html(file)
 		        data[:account_number] = file.css("#lblAcctNo").text().return_first_number
-		        data[:from_date] = file.css("#lblPeriod1").text().convert_to_date
-		        data[:to_date] = file.css("#lblPeriod2").text().convert_to_date
+		        data[:from_date] = file.css("#lblPeriod1").text().convert_string_to_date
+		        data[:to_date] = file.css("#lblPeriod2").text().convert_string_to_date
 		        data[:account_name] = file.css("#lblAcctName").text()
 		        data[:bank_name] = "Guaranty Trust Bank"
 
@@ -40,8 +40,8 @@ module NgBankParser
 				data[:transactions] = get_transactions_from_excel(file)
 		        data[:account_number] = file.row(10)[0].return_first_number
 		        date_strings = file.row(14)[0].get_date_strings
-		        data[:from_date] = date_strings[0].convert_to_date
-		        data[:to_date] = date_strings[1].convert_to_date
+		        data[:from_date] = date_strings[0].convert_string_to_date
+		        data[:to_date] = date_strings[1].convert_string_to_date
 		        data[:account_name] = file.row(5)[0]
 		        data[:bank_name] = "Guaranty Trust Bank"
 

@@ -17,7 +17,7 @@ class String
 	def return_first_number
 		self.scan(/\d+/)[0]
 	end
-	def convert_to_date
+	def convert_string_to_date
 		date_string = self.scan(/.....\d*..\d{4}/)[0]
 		Date.strptime(date_string,"%d/%b/%Y")
 	end

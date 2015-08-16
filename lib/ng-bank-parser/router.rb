@@ -18,7 +18,6 @@ module NgBankParser
         return {status: 0, message: "Your bank is not yet supported"}
       else
         @supported_extension_array += @banks_hash[@selected_bank_index][:parsers].map {|e| e[:extensions]}
-
         parser_picker(path)
       end      
     end
