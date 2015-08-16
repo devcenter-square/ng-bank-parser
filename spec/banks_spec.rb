@@ -45,6 +45,8 @@ $Banks.each do |bank|
 		describe key + " " + parser[:format] + " " +  "parser" do
 			class_name = key.capitalize + parser[:format].capitalize;
 			class_object = NgBankParser.const_get(class_name)
+			valid_file_path = parser[:valid]
+			invalid_file_path = parser[:invalid]
 
 			context "has required files" do
 				it "has parser file" do
@@ -54,13 +56,13 @@ $Banks.each do |bank|
 					expect(File).to exist(path), "Didnt find #{filename} in the parsers folder"
 				end
 				it "has test files" do			
-					expect(File).to exist(parser[:valid]), "Valid file path is wrong. Please check"
-					expect(File).to exist(parser[:invalid]), "Invalid file path is wrong. Please check"
+					expect(File).to exist(valid_file_path), "Valid file path is wrong. Please check"
+					expect(File).to exist(invalid_file_path), "Invalid file path is wrong. Please check"
 				end
 			end
 
 			context "with invalid statement" do
-				response = class_object.parse(parser[:invalid])
+				response = class_object.parse(invalid_file_path)
 
 				it "returns proper response" do
 					expect(response[:status]).to eq(0);
@@ -68,7 +70,8 @@ $Banks.each do |bank|
 			end
 
 			context "with valid statement" do
-				response = class_object.parse(parser[:valid])
+				response = class_object.parse(valid_file_path)
+				puts response
 
 				it "parses statement correctly" do
 					expect(response[:status]).to eq(1)

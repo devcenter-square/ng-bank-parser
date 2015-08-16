@@ -6,6 +6,7 @@ PATH
       nokogiri
       pdf-reader
       pdf-reader-turtletext
+      roo
 
 GEM
   remote: https://rubygems.org/
@@ -30,6 +31,9 @@ GEM
     pdf-reader-turtletext (0.2.2)
       pdf-reader (= 1.1.1)
     rake (10.4.2)
+    roo (2.1.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -44,6 +48,7 @@ GEM
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
     ruby-rc4 (0.1.5)
+    rubyzip (1.1.7)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
