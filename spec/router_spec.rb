@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Router" do
 
-	context "router variables exist" do
+	context "variables exist" do
 		it "checks if bank name is not empty" do
 			expect(:bank_name).not_to equal(nil), "bank name should not be empty"
 		end
@@ -12,24 +12,26 @@ describe "Router" do
 		end
 	end
 
-	# context "has file extension" do
-	#     key = $Banks.map { |e| e[:key].capitalize }
- #      	format = $Banks.map { |e| e[:parsers].map { |e| e[:format].capitalize }}
- #      	class_name = key + format.reduce(:concat)
- #      	array = []
+	context "when tested" do
+		it "calls correct parser" do
+			@banks = $Banks;
 
-	# 	it "is supported" do
-	# 		class_object = NgBankParser.const_get(class_name.reduce(:concat))			
-	# 		response = class_object.parse(:path.to_s)
+			# Choose a random bank and parser
+			random_bank = @banks.sample
+			random_parser = random_bank[:parsers].sample
 
-	# 		expect(response[:status]).to eq(0);
-	# 	end
+			bank_name = random_bank[:key]
+			path = random_parser[:valid]
 
-	# 	it "is not supported" do
-	# 		extension_name = File.extname(:path.to_s)
+			# Get response from router
+			router_response = NgBankParser::Router.parse(bank_name, path);
 
-	# 		expect(array).not_to include(extension_name) 
-	# 	end
-	# end
+			# Get expected response
+			class_name = bank_name.capitalize + random_parser[:format].capitalize;
+			class_object = NgBankParser.const_get(class_name)
+			expected_response = class_object.parse(path)
 
+			expect(router_response).to eq(expected_response)
+		end
+	end
 end
