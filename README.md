@@ -18,18 +18,64 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Using the gem is pretty straightforward and simple.
+```ruby
+result = NgBankParser::Router.parse(bank_key, file_path, password)
+```
 
-## Development
+`bank_name` is the name key of the bank that statement is from. There's a list of supported banks and formats below.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+`file_path` is obviously where the file you're trying to parse exists.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+`password` *(optional)* it's only required when the file you want to parse is password protected.
+
+`result` is a hash that contains all the information you need from your statment.
+
+```ruby
+result = {
+    status: 1,
+    data: {
+        bank_name: the_bank_name,
+        account_number: the_account_number,
+        account_name: the_account_name,
+        from_date: first_transaction_date,
+        to_date: last_transaction_date,
+        transactions: an_array_of_transaction_hashes
+    }
+}
+```
+
+Furthermore, `:transactions` in the `result` hash is an array of hashes. Below is an example of a transaction hash
+
+```ruby
+transaction = {
+    date: transaction_date,
+    amount: transaction_amount,
+    type: debit_or_credit,
+    balance: balance_after_transaction,
+    remarks: remarks,
+    ref: reference_id, # as provided by the statment
+}
+    
+```
+
+## List of Supported Banks
+
+United Bank for Africa: 
+- key: uba
+- supported formats: pdf
+
+Guaranty Trust Bank: 
+- key: gtb
+- supported formats: xls, xlsx
+    
+First Bank: 
+- key: firstbank
+- supported formats: pdf
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/devcenter-square/ng-bank-parser. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
-
+Documentation on contribution can be found in the contribution wiki
 
 ## License
 
