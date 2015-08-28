@@ -8,7 +8,7 @@ module NgBankParser
     extend TransactionTools
 
     class << self
-      def parse(url)
+      def parse(url, password = nil)
         unless ACCEPTED_FORMATS.include? File.extname(url)
           return invalid_file
         end

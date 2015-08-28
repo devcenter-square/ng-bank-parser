@@ -5,7 +5,7 @@ module NgBankParser
 		extend GtbExcelHelpers
 
 		class << self
-			def parse(path)
+			def parse(path, password = nil)
 				accepted_formats = [".xls",".xlsx"];
 				unless accepted_formats.include? File.extname(path)
 					return error_message("Invalid file format")

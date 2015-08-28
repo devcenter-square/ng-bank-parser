@@ -5,7 +5,7 @@ module NgBankParser
 	class FirstbankPdf
 		extend FirstbankPdfHelpers
 		@@transactions = []
-		def self.parse(path)
+		def self.parse(path, password = nil)
 			accepted_formats = [".pdf"];
 			unless accepted_formats.include? File.extname(path)
 				return error_message 'Invalid file format'
