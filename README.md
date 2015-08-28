@@ -62,16 +62,16 @@ transaction = {
 ## List of Supported Banks
 
 United Bank for Africa: 
-    - key: uba
-    - supported formats: pdf
+- key: uba
+- supported formats: pdf
 
 Guaranty Trust Bank: 
-    - key: gtb
-    - supported formats: xls, xlsx
+- key: gtb
+- supported formats: xls, xlsx
     
 First Bank: 
-    - key: firstbank
-    - supported formats: pdf
+- key: firstbank
+- supported formats: pdf
 
 ## Contributing
 
