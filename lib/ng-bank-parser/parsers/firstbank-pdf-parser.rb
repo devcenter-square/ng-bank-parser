@@ -14,7 +14,8 @@ module NgBankParser
 				return error_message 'Invalid file format'
 			end
 
-			if has_encryption? path
+			file = open(path)
+			if has_encryption? file
 				if password
 					unless get_unlocked_pdf? path, password
 						return error_message 'Password supplied for decryption is invalid.'
