@@ -10,6 +10,12 @@ module NgBankParser
 		
 		@@pdf_reader = nil
 		@@raw_transactions = [[]]
+		@@account_name = nil
+		@@account_number = nil
+		@@last_balance = nil
+		@@statement_period = nil
+		@@from_date = nil
+		@@to_date = nil
 
 		def has_encryption? path
 			begin

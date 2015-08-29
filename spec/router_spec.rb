@@ -17,7 +17,7 @@ describe "Router" do
 			@banks = $Banks;
 
 			# Choose a random bank and parser
-			random_bank = @banks.sample
+			random_bank = @banks[0] # @banks.sample
 			random_parser = random_bank[:parsers].sample
 
 			bank_key = random_bank[:key]
