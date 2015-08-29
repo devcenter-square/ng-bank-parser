@@ -22,9 +22,10 @@ describe "Router" do
 
 			bank_name = random_bank[:key]
 			path = random_parser[:valid]
+			password = random_parser[:valid] || nil
 
 			# Get response from router
-			router_response = NgBankParser::Router.parse(bank_name, path);
+			router_response = NgBankParser::Router.parse(bank_name, path, password);
 
 			# Get expected response
 			class_name = bank_name.capitalize + random_parser[:format].capitalize;
