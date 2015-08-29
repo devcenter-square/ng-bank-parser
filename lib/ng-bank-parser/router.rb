@@ -1,3 +1,5 @@
+require 'net/http'
+
 module NgBankParser
   class Router
     @banks = $Banks
@@ -12,11 +14,15 @@ module NgBankParser
       
       if @selected_bank.nil?
         return {status: 0, message: "Your bank is not yet supported"}
-      else
-        extensions = @selected_bank[:parsers].map {|e| e[:extensions]}
-        @supported_extensions = extensions.reduce(:concat)
-        pick_parser()
-      end      
+      end
+
+      unless file_exists(path) 
+        return {status: 0, message: "File does not exist or is not accesible"} 
+      end
+
+      extensions = @selected_bank[:parsers].map {|e| e[:extensions]}
+      @supported_extensions = extensions.reduce(:concat)
+      pick_parser()
     end
 
     private
@@ -40,6 +46,16 @@ module NgBankParser
       class_name = @selected_bank[:key].capitalize + parser[:format].capitalize
       class_object = NgBankParser.const_get(class_name)
       parser_response = class_object.parse(@path, @password)
+    end
+
+    def self.file_exists(path)
+      return true if File.exists?(path)
+
+      uri = URI(path)
+
+      request = Net::HTTP.new uri.host
+      response= request.request_head uri.path
+      return response.code.to_i == 200
     end
 
   end

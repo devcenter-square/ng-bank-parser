@@ -13,17 +13,21 @@ describe "Router" do
 	end
 
 	context "when tested" do
+		@banks = $Banks;
+
+		# Choose a random bank and parser
+		random_bank = @banks.sample
+		random_parser = random_bank[:parsers].sample
+
+		bank_key = random_bank[:key]
+		path = random_parser[:valid]
+		password = random_parser[:fixture_password]
+
+		it "checks for file existence" do
+			router_response = NgBankParser::Router.parse(bank_key, "http://apps.testinsane.com/rte/status/404")
+			expect(router_response).to eq({status: 0, message: "File does not exist or is not accesible"})
+		end
 		it "calls correct parser" do
-			@banks = $Banks;
-
-			# Choose a random bank and parser
-			random_bank = @banks.sample
-			random_parser = random_bank[:parsers].sample
-
-			bank_key = random_bank[:key]
-			path = random_parser[:valid]
-			password = random_parser[:fixture_password]
-
 			# Get response from router
 			router_response = NgBankParser::Router.parse(bank_key, path, password);
 
