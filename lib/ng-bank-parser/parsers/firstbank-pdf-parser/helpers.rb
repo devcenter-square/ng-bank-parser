@@ -27,9 +27,9 @@ module NgBankParser
 			if response.include? 'Unlock Failed'
 				return false
 			else
-				file = Tempfile.new('foo')
-				file.write(response)
-				@@pdf_reader = PDF::Reader.new(file.path)
+				pseudo_file = StringIO.new
+				pseudo_file.write(response)
+				@@pdf_reader = PDF::Reader.new(pseudo_file)
 				return true
 			end
 		end
