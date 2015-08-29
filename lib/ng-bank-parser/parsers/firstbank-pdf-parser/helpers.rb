@@ -20,7 +20,6 @@ module NgBankParser
 			end
 		end
 
-
 		def get_unlocked_pdf? path, password
 			response = PDFUnlocker.new(File.new(path), password).unlocked_pdf
 			return false unless response

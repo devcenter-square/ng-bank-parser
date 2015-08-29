@@ -14,8 +14,11 @@ module NgBankParser
         end
 
         file = open(url)
-        @reader = PDF::Reader.new(file)
+
+        if has_encryption? file return invalid_file
+
         set_up_first_page
+
         if is_valid_pdf?
           set_account_details
           set_transactions
@@ -26,6 +29,15 @@ module NgBankParser
       end
 
       private
+
+      def has_encryption? path
+        begin
+          @reader = PDF::Reader.new(path)
+          false
+        rescue PDF::Reader::EncryptedPDFError
+          true
+        end
+      end
 
       def set_up_first_page
         @first_page_text = @reader.pages.first.text.remove_empty_lines
