@@ -30,9 +30,9 @@ describe "Router" do
 			# Get expected response
 			class_name = bank_key.capitalize + random_parser[:format].capitalize;
 			class_object = NgBankParser.const_get(class_name)
-			expected_response = class_object.parse(path, password)
+			parser_response = class_object.parse(path, password)
 
-			expect(router_response).to eq(expected_response)
+			expect(router_response).to eq(parser_response)
 		end
 	end
 end
