@@ -1,6 +1,7 @@
 require 'pdf-reader'
 require 'date'
 require 'open-uri'
+require 'securerandom'
 require_relative 'statement_utils'
 require_relative '../../pdf-unlocker.rb'
 
@@ -27,9 +28,8 @@ module NgBankParser
 		end
 
 		def get_unlocked_pdf? path, password
-			file = open("http://helloworld.ng/firstbank.pdf")
-			# file = File.new(path)
-			response = PDFUnlocker.new(file, password).unlocked_pdf
+			response = PDFUnlocker.unlock(path, password)
+
 			return false unless response
 			if response.include? 'Unlock Failed'
 				return false

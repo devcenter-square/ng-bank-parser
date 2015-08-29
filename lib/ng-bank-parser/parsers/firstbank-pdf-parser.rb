@@ -1,7 +1,6 @@
 require 'pdf-reader'
 require_relative 'firstbank-pdf-parser/helpers'
 
-
 module NgBankParser
 	class FirstbankPdf
 		extend FirstbankPdfHelpers
