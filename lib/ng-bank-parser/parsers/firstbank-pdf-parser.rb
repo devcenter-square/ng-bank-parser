@@ -1,7 +1,6 @@
 require 'pdf-reader'
 require_relative 'firstbank-pdf-parser/helpers'
 
-
 module NgBankParser
 	class FirstbankPdf
 		extend FirstbankPdfHelpers
@@ -15,6 +14,7 @@ module NgBankParser
 			end
 
 			file = open(path)
+
 			if has_encryption? file
 				if password
 					unless get_unlocked_pdf? path, password
@@ -42,9 +42,7 @@ module NgBankParser
 			else
 				return error_message 'Could not find any transactions'
 			end
-
 		end
-
 
 		private
 
