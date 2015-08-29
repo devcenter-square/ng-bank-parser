@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Opemipo Aikomo","Timilehin Ajiboye","Lolu Bodunwa","Oluro Olaoluwa"]
   spec.email         = ["opemipoaikomo@gmail.com"]
 
-  spec.summary       = %q{This is a simple gem to parse Nigerian bank statements of all formats}
-  spec.description   = %q{This is a simple gem to parse Nigerian bank statements of all formats. If your bank and/or file format is not supported, consider reading the contribute wiki and submitting a pull request.}
-  spec.homepage      = "https://github.com/devcenter-square/ng-bank-parser"
+  spec.summary       = %q{This is a simple gem to parse Nigerian bank statements of all formats created by Devcenter Square}
+  spec.description   = %q{This is a simple gem to parse Nigerian bank statements of all formats. This is a community project by Devcenter Square (devcenter-square.github.io). If your bank and/or file format is not supported, consider reading the contribute wiki and submitting a pull request.}
+  spec.homepage      = "http://devcenter-square.github.io/ng-bank-parser/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

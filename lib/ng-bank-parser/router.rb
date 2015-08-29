@@ -7,9 +7,9 @@ module NgBankParser
     #this takes our bank parser along with the bank name supplied from the payload so as to compare
     #and see if the file extension is available for that bank
     #it's result is to fill up the @supported_extension_array with the supported bank extensions
-    def self.parse(bank_name, path, password = nil)
+    def self.parse(bank_key, path, password = nil)
       @password = password;
-      @selected_bank_index = @banks_hash.index {|x| x[:key] == bank_name}
+      @selected_bank_index = @banks_hash.index {|x| x[:key] == bank_key}
       
       if @selected_bank_index.nil?
         return {status: 0, message: "Your bank is not yet supported"}
