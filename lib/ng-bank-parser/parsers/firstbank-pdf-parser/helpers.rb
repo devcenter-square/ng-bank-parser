@@ -27,8 +27,8 @@ module NgBankParser
 		end
 
 		def get_unlocked_pdf? path, password
-			file = open(path)
-			# file = File.new("lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf")
+			file = open("http://helloworld.ng/firstbank.pdf")
+			# file = File.new(path)
 			response = PDFUnlocker.new(file, password).unlocked_pdf
 			return false unless response
 			if response.include? 'Unlock Failed'
