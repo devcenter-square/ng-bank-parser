@@ -10,6 +10,15 @@ module NgBankParser
 				extensions: ["xls","xlsx"]
 			}]
 		  },{
+		    key: "uba",
+		    name: "United Bank for Africa",
+		    parsers: [{
+				format: "pdf",
+				valid: "lib/ng-bank-parser/fixtures/uba-pdf-valid.pdf",
+				invalid: "lib/ng-bank-parser/fixtures/uba-pdf-invalid.pdf",
+				extensions: ["pdf"]
+			}]
+		  },{
 			key: "firstbank",
 			name: "First Bank",
 			parsers: [{
