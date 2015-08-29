@@ -22,7 +22,7 @@ describe "Router" do
 
 			bank_name = random_bank[:key]
 			path = random_parser[:valid]
-			password = random_parser[:fixture_password] || nil
+			password = random_parser[:fixture_password]
 
 			# Get response from router
 			router_response = NgBankParser::Router.parse(bank_name, path, password);
