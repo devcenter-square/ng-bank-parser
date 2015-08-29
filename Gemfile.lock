@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ng-bank-parser (0.1.2)
+    ng-bank-parser (0.1.4)
       activesupport
       httmultiparty
       nokogiri

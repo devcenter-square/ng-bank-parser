@@ -4,7 +4,7 @@ describe "Router" do
 
 	context "variables exist" do
 		it "checks if bank name is not empty" do
-			expect(:bank_name).not_to equal(nil), "bank name should not be empty"
+			expect(:bank_key).not_to equal(nil), "bank name should not be empty"
 		end
 
 		it "checks if file path is not empty" do
@@ -20,15 +20,15 @@ describe "Router" do
 			random_bank = @banks.sample
 			random_parser = random_bank[:parsers].sample
 
-			bank_name = random_bank[:key]
+			bank_key = random_bank[:key]
 			path = random_parser[:valid]
 			password = random_parser[:fixture_password]
 
 			# Get response from router
-			router_response = NgBankParser::Router.parse(bank_name, path, password);
+			router_response = NgBankParser::Router.parse(bank_key, path, password);
 
 			# Get expected response
-			class_name = bank_name.capitalize + random_parser[:format].capitalize;
+			class_name = bank_key.capitalize + random_parser[:format].capitalize;
 			class_object = NgBankParser.const_get(class_name)
 			expected_response = class_object.parse(path, password)
 
