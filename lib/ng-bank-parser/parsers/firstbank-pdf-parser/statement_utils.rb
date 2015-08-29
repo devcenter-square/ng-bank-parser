@@ -1,10 +1,10 @@
 module NgBankParser
-	module StatementUtils
+  module StatementUtils
 
     def get_first_page_text reader
-			lines = reader.pages.first.text.remove_empty_lines.lines #lines without the spaces
+      lines = reader.pages.first.text.remove_empty_lines.lines #lines without the spaces
       lines.map{ |line| split_on_2_or_more_spaces(line) }
-		end
+    end
 
 
     def get_all_text reader
@@ -47,5 +47,5 @@ module NgBankParser
     def remove_empty_lines
       self.gsub /^$\n/, ''
     end
-	end
+  end
 end

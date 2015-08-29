@@ -1,10 +1,13 @@
 require 'pdf-reader'
 require 'date'
+require 'open-uri'
 require_relative 'statement_utils'
+require_relative '../../pdf-unlocker.rb'
 
 module NgBankParser
 	module FirstbankPdfHelpers
 		include StatementUtils
+		
 		@@pdf_reader = nil
 		@@raw_transactions = [[]]
 
@@ -14,6 +17,20 @@ module NgBankParser
 				false
 			rescue PDF::Reader::EncryptedPDFError
 				true
+			end
+		end
+
+
+		def get_unlocked_pdf? path, password
+			response = PDFUnlocker.new(File.new(path), password).unlocked_pdf
+			return false unless response
+			if response.include? 'Unlock Failed'
+				return false
+			else
+				file = Tempfile.new('foo')
+				file.write(response)
+				@@pdf_reader = PDF::Reader.new(file.path)
+				return true
 			end
 		end
 
@@ -37,17 +54,17 @@ module NgBankParser
 
 		def get_account_data
 			lines = get_first_page_text @@pdf_reader
-      lines.each do |line|
-        if line[0].start_with? 'Account No:'
-          set_account_number line
-          set_last_balance line
-        elsif line[0].start_with? 'Account Name:'
-          set_account_name line
-        elsif line[0].start_with? 'For the Period of:'
-          set_statement_period line
+	  		lines.each do |line|
+				if line[0].start_with? 'Account No:'
+			 		set_account_number line
+			  		set_last_balance line
+				elsif line[0].start_with? 'Account Name:'
+			  		set_account_name line
+				elsif line[0].start_with? 'For the Period of:'
+			  		set_statement_period line
 				end
-      end
-    end
+			end
+		end
 
 
 		def get_account_number

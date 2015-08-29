@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "roo"
   spec.add_dependency "pdf-reader"
   spec.add_dependency "activesupport"
+  spec.add_dependency 'httmultiparty'
 end

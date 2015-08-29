@@ -8,14 +8,20 @@ module NgBankParser
 
 		@@transactions = []
 
-		def self.parse(path)
+		def self.parse(path, password=nil)
 			accepted_formats = [".pdf"];
 			unless accepted_formats.include? File.extname(path)
 				return error_message 'Invalid file format'
-      end
+			end
 
 			if has_encryption? path
-				return error_message 'PDF File is encrypted'
+				if password
+					unless get_unlocked_pdf? path, password
+						return error_message 'Password supplied for decryption is invalid.'
+					end
+				else
+					return error_message 'PDF File is encrypted and no password was supplied'
+				end
 			end
 
 			unless contains_account_data?
@@ -35,6 +41,7 @@ module NgBankParser
 			else
 				return error_message 'Could not find any transactions'
 			end
+
 		end
 
 
