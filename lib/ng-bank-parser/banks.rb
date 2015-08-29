@@ -16,7 +16,8 @@ module NgBankParser
 				format: "pdf",
 				valid: "lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf",
 				invalid: "lib/ng-bank-parser/fixtures/firstbank-pdf-invalid.xlsx",
-				extensions: ["pdf"]
+				extensions: ["pdf"],
+				password: "123"
 			}]
 		}]
 	end

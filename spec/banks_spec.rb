@@ -27,7 +27,7 @@ describe "Every Bank" do
 	it "has valid parser keys" do
 		subject.each do |bank|
 			bank[:parsers].each do |parser|
-				expect(parser).to match({
+				expect(parser).to include({
 					:format => an_instance_of(String),
 					:valid => an_instance_of(String),
 					:invalid => an_instance_of(String),
@@ -70,7 +70,8 @@ $Banks.each do |bank|
 			end
 
 			context "with valid statement" do
-				response = class_object.parse(valid_file_path)
+				password = parser[:password] || nil
+				response = class_object.parse(valid_file_path, password)
 
 				it "parses statement correctly" do
 					expect(response[:status]).to eq(1)
