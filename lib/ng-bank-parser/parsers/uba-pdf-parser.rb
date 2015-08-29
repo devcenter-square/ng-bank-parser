@@ -15,7 +15,9 @@ module NgBankParser
 
         file = open(url)
 
-        if has_encryption? file return invalid_file
+        if has_encryption? file 
+          return invalid_file
+        end
 
         set_up_first_page
 
