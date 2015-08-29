@@ -12,8 +12,8 @@ module NgBankParser
     private
 
     def set_transactions
-      @transactions ||= Array.new
-      @transaction_strings ||= Array.new
+      @transactions = Array.new
+      @transaction_strings = Array.new
       @reader.pages[0..-2].each do |page|
         seperate_lines_into_transaction_strings(page.text.remove_empty_lines.lines)
       end
