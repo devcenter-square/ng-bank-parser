@@ -45,6 +45,15 @@ result = {
 }
 ```
 
+`:status` can either be 1 or 0. 1 for when the parsing is succesful and 0 for when it's not. A status of 0 is accompanied with an error message that aims to clarify why it could not parse the file.
+
+```ruby
+result = {
+    status: 0,
+    message: "RELEVANT ERROR MESSAGE"
+}
+```
+
 Furthermore, `:transactions` in the `result` hash is an array of hashes. Below is an example of a transaction hash
 
 ```ruby
