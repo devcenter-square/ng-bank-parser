@@ -6,11 +6,11 @@ module NgBankParser
 		base_uri 'http://pdf-unlocker.herokuapp.com'
 
 		def initialize(file, password)
+			puts file
 			@pdf = file
 			@password = password
 		end
 
-		
 		def unlocked_pdf
 			options = { :pdf => @pdf, :password => @password }
 			begin

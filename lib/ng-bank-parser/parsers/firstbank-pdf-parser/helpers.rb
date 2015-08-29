@@ -17,9 +17,9 @@ module NgBankParser
 		@@from_date = nil
 		@@to_date = nil
 
-		def has_encryption? path
+		def has_encryption? file
 			begin
-				@@pdf_reader = PDF::Reader.new(path)
+				@@pdf_reader = PDF::Reader.new(file)
 				false
 			rescue PDF::Reader::EncryptedPDFError
 				true
@@ -27,15 +27,21 @@ module NgBankParser
 		end
 
 		def get_unlocked_pdf? path, password
-			response = PDFUnlocker.new(File.new(path), password).unlocked_pdf
+			file = open(path)
+			# file = File.new("lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf")
+			response = PDFUnlocker.new(file, password).unlocked_pdf
 			return false unless response
 			if response.include? 'Unlock Failed'
 				return false
 			else
 				pseudo_file = StringIO.new
 				pseudo_file.write(response)
-				@@pdf_reader = PDF::Reader.new(pseudo_file)
-				return true
+				begin
+					@@pdf_reader = PDF::Reader.new(pseudo_file)
+					return true
+				rescue
+					return false					
+				end
 			end
 		end
 

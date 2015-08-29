@@ -23,7 +23,7 @@ module NgBankParser
 			name: "First Bank",
 			parsers: [{
 				format: "pdf",
-				valid: "lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf",
+				valid: "http://helloworld.ng/firstbank.pdf", #{}"lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf",
 				fixture_password: 19856,
 				invalid: "lib/ng-bank-parser/fixtures/firstbank-pdf-invalid.pdf",
 				extensions: ["pdf"]
