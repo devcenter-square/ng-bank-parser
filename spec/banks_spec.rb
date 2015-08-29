@@ -70,7 +70,7 @@ $Banks.each do |bank|
 			end
 
 			context "with valid statement" do
-				password = parser[:password] || nil
+				password = parser[:fixture_password] || nil
 				response = class_object.parse(valid_file_path, password)
 
 				it "parses statement correctly" do

@@ -22,7 +22,7 @@ describe "Router" do
 
 			bank_name = random_bank[:key]
 			path = random_parser[:valid]
-			password = random_parser[:valid] || nil
+			password = random_parser[:fixture_password] || nil
 
 			# Get response from router
 			router_response = NgBankParser::Router.parse(bank_name, path, password);
@@ -30,7 +30,7 @@ describe "Router" do
 			# Get expected response
 			class_name = bank_name.capitalize + random_parser[:format].capitalize;
 			class_object = NgBankParser.const_get(class_name)
-			expected_response = class_object.parse(path)
+			expected_response = class_object.parse(path, password)
 
 			expect(router_response).to eq(expected_response)
 		end
