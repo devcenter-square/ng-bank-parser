@@ -38,7 +38,8 @@ module NgBankParser
     #Builds the the parser to use from the name and file format of the uploaded file
     def self.parse_with(parser)
       class_name = @selected_bank[:key].capitalize + parser[:format].capitalize
-      NgBankParser.const_get(class_name).parse(@path, @password)
+      class_object = NgBankParser.const_get(class_name)
+      parser_response = class_object.parse(@path, @password)
     end
 
   end
