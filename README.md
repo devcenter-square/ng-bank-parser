@@ -29,7 +29,7 @@ Using the gem is pretty straightforward and simple.
 result = NgBankParser::Router.parse(bank_name, file_path, password)
 ```
 
-`bank_name` is the name of the bank that provides the statement. There's a list of supported banks and formats below, therefore use the key provided as the `bank_name`.
+`bank_name` is the name of the bank that provides the statement. There's a [list of supported banks and formats](#list-of-supported-banks) below, therefore use the key provided as the `bank_name`.
 
 `file_path` is obviously where the file you're trying to parse exists.
 
