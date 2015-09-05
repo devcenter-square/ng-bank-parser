@@ -2,7 +2,7 @@
 This is a simple gem to parse Nigerian bank statements of all formats. If your bank and/or file format is not supported, consider reading the contribute wiki and submitting a pull request.
 
 ## API
-Because not everyone develops in rails, we created a public API to use the gem at http://bank-parser.devcenter.co/parse. The parameters are (bank_key, file_path, password). Read the *Usage* section for more information
+Because not everyone develops in rails, we created a public API to use the gem at http://bank-parser.devcenter.co/parse. The parameters are (bank_name, file_path, password). Read the *Usage* section for more information
 
     http://bank-parser.devcenter.co/parse(bank_key, file_path, password)
 
@@ -26,10 +26,10 @@ Or install it yourself as:
 
 Using the gem is pretty straightforward and simple.
 ```ruby
-result = NgBankParser::Router.parse(bank_key, file_path, password)
+result = NgBankParser::Router.parse(bank_name, file_path, password)
 ```
 
-`bank_name` is the name key of the bank that statement is from. There's a list of supported banks and formats below.
+`bank_name` is the name of the bank that provides the statement. There's a list of supported banks and formats below, therefore use the key provided as the `bank_name`.
 
 `file_path` is obviously where the file you're trying to parse exists.
 
@@ -71,20 +71,20 @@ transaction = {
     remarks: remarks,
     ref: reference_id, # as provided by the statment
 }
-    
+
 ```
 
 ## List of Supported Banks
 
-United Bank for Africa: 
+United Bank for Africa:
 - key: uba
 - supported formats: pdf
 
-Guaranty Trust Bank: 
+Guaranty Trust Bank:
 - key: gtb
 - supported formats: xls, xlsx
-    
-First Bank: 
+
+First Bank:
 - key: firstbank
 - supported formats: pdf
 
