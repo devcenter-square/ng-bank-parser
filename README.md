@@ -2,7 +2,7 @@
 This is a simple gem to parse Nigerian bank statements of all formats. If your bank and/or file format is not supported, consider reading the contribute wiki and submitting a pull request.
 
 ## API
-Because not everyone develops in rails, we created a public API to use the gem at http://bank-parser.devcenter.co/parse. The parameters are (bank_name, file_path, password). Read the *Usage* section for more information
+Because not everyone develops in rails, we created a public API to use the gem at http://bank-parser.devcenter.co/parse. The parameters are (bank_key, file_path, password). Read the *Usage* section for more information
 
     http://bank-parser.devcenter.co/parse(bank_key, file_path, password)
 
