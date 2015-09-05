@@ -29,7 +29,7 @@ Using the gem is pretty straightforward and simple.
 result = NgBankParser::Router.parse(bank_key, file_path, password)
 ```
 
-`bank_name` is the name key of the bank that statement is from. There's a list of supported banks and formats below.
+`bank_key` is the key of the bank that provides the statement. There's a [list of supported banks and formats](#list-of-supported-banks) below, therefore use the key provided for each bank.
 
 `file_path` is obviously where the file you're trying to parse exists.
 
@@ -71,20 +71,20 @@ transaction = {
     remarks: remarks,
     ref: reference_id, # as provided by the statment
 }
-    
+
 ```
 
 ## List of Supported Banks
 
-United Bank for Africa: 
+United Bank for Africa:
 - key: uba
 - supported formats: pdf
 
-Guaranty Trust Bank: 
+Guaranty Trust Bank:
 - key: gtb
 - supported formats: xls, xlsx
-    
-First Bank: 
+
+First Bank:
 - key: firstbank
 - supported formats: pdf
 
