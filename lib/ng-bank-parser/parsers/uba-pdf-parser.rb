@@ -87,7 +87,7 @@ module NgBankParser
 
       def return_payload
         return {
-            status: 1,
+            status: 200,
             data: {
                 bank_name: @bank_name,
                 account_number: @account_number,
@@ -101,7 +101,7 @@ module NgBankParser
 
       def invalid_file
         return {
-            status: 0, message: INVALID_FILE_STRING
+            status: 400, message: INVALID_FILE_STRING
         }
       end
 

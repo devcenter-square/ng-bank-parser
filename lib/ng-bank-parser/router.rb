@@ -10,7 +10,7 @@ module NgBankParser
     def self.parse(bank_key, path, password = nil)
 
       selected_bank = @banks[bank_key]
-      return {status: 0, message: 'Your bank is not yet supported'} unless selected_bank
+      return {status: 400, message: 'Your bank is not yet supported'} unless selected_bank
 
       extension_name = File.extname(path).delete('.')
       parser = selected_bank[:parsers][extension_name]
@@ -18,7 +18,7 @@ module NgBankParser
       if parser
         parse_with(parser, bank_key, path, password)
       else
-        return {status: 0, message:"The '.#{extension_name}' file format is not supported for this bank (#{selected_bank[:name]})."}
+        return {status: 400, message:"The '.#{extension_name}' file format is not supported for this bank (#{selected_bank[:name]})."}
       end
     end
 
