@@ -1,38 +1,99 @@
 require 'spec_helper'
 
-describe "Router" do
+describe 'Router' do
 
-	context "variables exist" do
-		it "checks if bank name is not empty" do
-			expect(:bank_key).not_to equal(nil), "bank name should not be empty"
+	context 'variables exist' do
+		it 'checks if bank name is not empty' do
+			expect(:bank_key).not_to equal(nil), 'bank name should not be empty'
 		end
 
-		it "checks if file path is not empty" do
-			expect(:path).not_to equal(nil), "file path should not be empty"
+		it 'checks if file path is not empty' do
+			expect(:path).not_to equal(nil), 'file path should not be empty'
 		end
-	end
+  end
 
-	context "when tested" do
-		it "calls correct parser" do
-			@banks = $Banks;
+  context 'with invalid file type' do
+    context 'when statement is of type pdf from uba' do
+      it 'parses file' do
+        parse = NgBankParser::Router.parse('uba', 'lib/ng-bank-parser/fixtures/uba-pdf-invalid.pdf')
+        expect(parse[:status]).to eq 400
+      end
 
-			# Choose a random bank and parser
-			random_bank = @banks.sample
-			random_parser = random_bank[:parsers].sample
+      it 'calls the right class' do
+        expect(NgBankParser::UbaPdf).to receive(:parse)
+        NgBankParser::Router.parse('uba', 'lib/ng-bank-parser/fixtures/uba-pdf-invalid.pdf')
+      end
+    end
 
-			bank_key = random_bank[:key]
-			path = random_parser[:valid]
-			password = random_parser[:fixture_password]
+    context 'when statement is of type excel from gtb' do
+      it 'parses file' do
+        parse = NgBankParser::Router.parse('gtb', 'lib/ng-bank-parser/fixtures/gtb-excel-invalid.pdf')
+        expect(parse[:status]).to eq 400
+      end
 
-			# Get response from router
-			router_response = NgBankParser::Router.parse(bank_key, path, password);
+      it 'calls the right class' do
+        expect(NgBankParser::GtbExcel).to_not receive(:parse)
+        NgBankParser::Router.parse('gtb', 'lib/ng-bank-parser/fixtures/gtb-excel-invalid.pdf')
+      end
+    end
 
-			# Get expected response
-			class_name = bank_key.capitalize + random_parser[:format].capitalize;
-			class_object = NgBankParser.const_get(class_name)
-			parser_response = class_object.parse(path, password)
+    context 'when statement is of type pdf from firstbank' do
+      it 'parses file' do
+        parse = NgBankParser::Router.parse('firstbank', 'lib/ng-bank-parser/fixtures/firstbank-pdf-invalid.pdf', 19856)
+        expect(parse[:status]).to eq 400
+      end
 
-			expect(router_response).to eq(parser_response)
-		end
-	end
+      it 'calls the right class' do
+        expect(NgBankParser::FirstbankPdf).to receive(:parse)
+        NgBankParser::Router.parse('firstbank', 'lib/ng-bank-parser/fixtures/firstbank-pdf-invalid.pdf', 19856)
+      end
+    end
+  end
+
+  context 'with valid file type' do
+    context 'when statement is of type pdf from uba' do
+      it 'parses file' do
+        parse = NgBankParser::Router.parse('uba', 'lib/ng-bank-parser/fixtures/uba-pdf-valid.pdf')
+        expect(parse[:status]).to eq 200
+      end
+
+      it 'calls the right class' do
+        expect(NgBankParser::UbaPdf).to receive(:parse)
+        NgBankParser::Router.parse('uba', 'lib/ng-bank-parser/fixtures/uba-pdf-valid.pdf')
+      end
+    end
+
+    context 'when statement is of type excel from gtb' do
+      it 'parses file' do
+        parse = NgBankParser::Router.parse('gtb', 'lib/ng-bank-parser/fixtures/gtb-excel-valid.xlsx')
+        expect(parse[:status]).to eq 200
+      end
+
+      it 'calls the right class' do
+        expect(NgBankParser::GtbExcel).to receive(:parse)
+        NgBankParser::Router.parse('gtb', 'lib/ng-bank-parser/fixtures/gtb-excel-valid.xlsx')
+      end
+    end
+
+    context 'when statement is of type pdf from firstbank' do
+      it 'parses file' do
+        parse = NgBankParser::Router.parse('firstbank', 'lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf', 19856)
+        expect(parse[:status]).to eq 200
+      end
+
+      it 'calls the right class' do
+        expect(NgBankParser::FirstbankPdf).to receive(:parse)
+        NgBankParser::Router.parse('firstbank', 'lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf', 19856)
+      end
+    end
+  end
+
+  context 'when bank is not supported' do
+    it 'returns error message' do
+      expect(NgBankParser::Router).to_not receive(:parse_with)
+      parse = NgBankParser::Router.parse('bank_not_supported', 'lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf', 19856)
+
+      expect(parse[:message]).to eq 'Your bank is not yet supported'
+    end
+  end
 end
