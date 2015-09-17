@@ -16,7 +16,7 @@ describe 'Router' do
     context 'when statement is of type pdf from uba' do
       it 'parses file' do
         parse = NgBankParser::Router.parse('uba', 'lib/ng-bank-parser/fixtures/uba-pdf-invalid.pdf')
-        expect(parse[:status]).to eq 0
+        expect(parse[:status]).to eq 400
       end
 
       it 'calls the right class' do
@@ -28,7 +28,7 @@ describe 'Router' do
     context 'when statement is of type excel from gtb' do
       it 'parses file' do
         parse = NgBankParser::Router.parse('gtb', 'lib/ng-bank-parser/fixtures/gtb-excel-invalid.pdf')
-        expect(parse[:status]).to eq 0
+        expect(parse[:status]).to eq 400
       end
 
       it 'calls the right class' do
@@ -40,7 +40,7 @@ describe 'Router' do
     context 'when statement is of type pdf from firstbank' do
       it 'parses file' do
         parse = NgBankParser::Router.parse('firstbank', 'lib/ng-bank-parser/fixtures/firstbank-pdf-invalid.pdf', 19856)
-        expect(parse[:status]).to eq 0
+        expect(parse[:status]).to eq 400
       end
 
       it 'calls the right class' do
@@ -54,7 +54,7 @@ describe 'Router' do
     context 'when statement is of type pdf from uba' do
       it 'parses file' do
         parse = NgBankParser::Router.parse('uba', 'lib/ng-bank-parser/fixtures/uba-pdf-valid.pdf')
-        expect(parse[:status]).to eq 1
+        expect(parse[:status]).to eq 200
       end
 
       it 'calls the right class' do
@@ -66,7 +66,7 @@ describe 'Router' do
     context 'when statement is of type excel from gtb' do
       it 'parses file' do
         parse = NgBankParser::Router.parse('gtb', 'lib/ng-bank-parser/fixtures/gtb-excel-valid.xlsx')
-        expect(parse[:status]).to eq 1
+        expect(parse[:status]).to eq 200
       end
 
       it 'calls the right class' do
@@ -78,7 +78,7 @@ describe 'Router' do
     context 'when statement is of type pdf from firstbank' do
       it 'parses file' do
         parse = NgBankParser::Router.parse('firstbank', 'lib/ng-bank-parser/fixtures/firstbank-pdf-valid.pdf', 19856)
-        expect(parse[:status]).to eq 1
+        expect(parse[:status]).to eq 200
       end
 
       it 'calls the right class' do

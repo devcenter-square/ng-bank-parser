@@ -11,7 +11,7 @@ end
 describe 'Every Bank' do
   subject { NgBankParser::Banks::BANK_DEFINITIONS }
 
-	it 'contains 4 banks' do
+	it 'contains 3 banks' do
 		expect(subject.length).to equal(3)
   end
 
