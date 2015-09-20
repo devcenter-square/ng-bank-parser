@@ -53,4 +53,8 @@ class String
     Date.strptime(self, '%d-%b-%Y')
   end
 
+  def get_numbers
+    self.remove_commas.to_f
+  end
+
 end
