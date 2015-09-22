@@ -48,11 +48,10 @@ module NgBankParser
 
 
     def self.unlock_pdf(path, password)
-
         unlocker = PDFUnlocker.new
-        file = unlocker.unlock(path, password)
+        response = unlocker.unlock(path, password)
 
-        return nil unless file
+        return nil unless response
 
         if response.include? 'Unlock Failed'
           return nil

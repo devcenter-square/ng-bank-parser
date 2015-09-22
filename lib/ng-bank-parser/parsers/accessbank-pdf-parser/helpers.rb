@@ -18,13 +18,13 @@ module AccessbankPdfHelpers
     details = Hash.new
 
     details[:bank_name] = 'Access Bank'
-    details[:account_number] = get_account_number(pdf_array) #pdf_array[1][0]
-    details[:account_name] =  get_account_name(pdf_array) #pdf_array[3][1]
+    details[:account_number] = get_account_number(pdf_array)
+    details[:account_name] =  get_account_name(pdf_array)
 
     date_range = get_date_range(pdf_array)
 
-    details[:from_date] = string_with_slash_to_date(date_range[:from])#pdf_array[6][0])
-    details[:to_date] = string_with_slash_to_date(date_range[:to])#pdf_array[7][0])
+    details[:from_date] = string_with_slash_to_date(date_range[:from])
+    details[:to_date] = string_with_slash_to_date(date_range[:to])
     details[:transactions] = get_transactions(pdf_array)
 
     return details
@@ -53,7 +53,7 @@ module AccessbankPdfHelpers
   def get_account_number(pdf_array)
 
     pdf_array.each do |row|
-      row.each_with_index do |cell, index|
+      row.each do |cell|
         if cell =~ /[0-9]{10}/
           return cell
         end
@@ -153,7 +153,7 @@ module AccessbankPdfHelpers
 
 
     def valid_transaction?(line)
-      line[0] =~ /([0-3][0-9])[\-]([a-zA-Z]+)[\-](1[0-9])/ #matches access bank date pattern
+      line[0] =~ /([0-3][0-9])[\-]([a-zA-Z]+)[\-](1[0-9])/ #first column matches access bank transaction date pattern
     end
 
 
