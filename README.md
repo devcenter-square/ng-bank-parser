@@ -88,6 +88,10 @@ First Bank:
 - key: firstbank
 - supported formats: pdf
 
+Heritage Bank:
+- key: hb
+- supported formats: pdf
+
 ## Contributing
 
 Documentation on contribution can be found in the contribution wiki
