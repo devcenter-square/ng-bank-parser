@@ -6,6 +6,7 @@ require "ng-bank-parser/parsers/gtb-excel-parser"
 require "ng-bank-parser/parsers/uba-pdf-parser"
 require "ng-bank-parser/parsers/hb-pdf-parser"
 require "ng-bank-parser/parsers/firstbank-pdf-parser"
+require "ng-bank-parser/parsers/accessbank-pdf-parser"
 
 module NgBankParser
   # Your code goes here...
