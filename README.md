@@ -51,7 +51,7 @@ result = {
 }
 ```
 
-`:status` can either be 1 or 0. 1 for when the parsing is succesful and 0 for when it's not. A status of 0 is accompanied with an error message that aims to clarify why it could not parse the file.
+`:status` can either be 200 or 400. 200 for when the parsing is succesful and 200 for when it's not. A status of 400 is accompanied with an error message that aims to clarify why it could not parse the file.
 
 ```ruby
 result = {
