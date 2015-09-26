@@ -39,7 +39,7 @@ result = NgBankParser::Router.parse(bank_key, file_path, password)
 
 ```ruby
 result = {
-    status: 1,
+    status: 200,
     data: {
         bank_name: the_bank_name,
         account_number: the_account_number,
@@ -55,7 +55,7 @@ result = {
 
 ```ruby
 result = {
-    status: 0,
+    status: 400,
     message: "RELEVANT ERROR MESSAGE"
 }
 ```

@@ -65,7 +65,7 @@ $Banks.each do |bank|
 				response = class_object.parse(invalid_file_path)
 
 				it "returns proper response" do
-					expect(response[:status]).to eq(0);
+					expect(response[:status]).to eq(400);
 				end
 			end
 
@@ -74,7 +74,7 @@ $Banks.each do |bank|
 				response = class_object.parse(valid_file_path, password)
 
 				it "parses statement correctly" do
-					expect(response[:status]).to eq(1)
+					expect(response[:status]).to eq(200)
 					expect(response[:data]).to match({
 						:bank_name => an_instance_of(String),
 						:account_number => an_instance_of(String),

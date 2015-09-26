@@ -157,7 +157,7 @@ module NgBankParser
 
 		def error_message msg
 			return {
-					status: 0,
+					status: 400,
 					message: msg
 				}
 		end
@@ -165,7 +165,7 @@ module NgBankParser
 
 		def send_response data
 			return {
-					status: 1,
+					status: 200,
 					data: data
 				}
 		end

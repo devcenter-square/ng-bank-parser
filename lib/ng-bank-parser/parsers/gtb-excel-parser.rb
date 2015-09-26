@@ -50,14 +50,14 @@ module NgBankParser
 
 			def error_message(text)
 				return { 
-					status: 0, 
+					status: 400,
 					message: text
 				}
 			end
 
 			def send_response(data)
 				return {
-					status: 1,
+					status: 200,
 					data: data
 				}
 			end
