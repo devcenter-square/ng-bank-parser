@@ -1,6 +1,6 @@
 module NgBankParser
   class Router
-    @banks = $Banks
+    @banks = NgBankParser::Banks::BANK_DEFINITIONS
     
     #this takes our bank parser along with the bank name supplied from the payload so as to compare
     #and see if the file extension is available for that bank
