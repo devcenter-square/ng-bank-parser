@@ -57,13 +57,12 @@ module NgBankParser
         return {
             status: VALID_ACCOUNT_STATUS,
             data: {
-                bank_name: $Banks[1][:name],
+                bank_name: NgBankParser::Banks::BANK_DEFINITIONS[1][:name],
                 account_number: @account_number,
                 account_name: @account_name,
                 from_date: @start_date,
                 to_date: @end_date,
                 transactions: @transactions
-                # reader: @reader
             }
         }
       end

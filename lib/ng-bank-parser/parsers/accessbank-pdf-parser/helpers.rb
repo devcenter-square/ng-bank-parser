@@ -114,11 +114,11 @@ module AccessbankPdfHelpers
 
 
   def error(msg)
-    { status: 0, message: msg }
+    { status: 400, message: msg }
   end
 
   def success(data)
-    { status: 1, data: data }
+    { status: 200, data: data }
   end
 
 

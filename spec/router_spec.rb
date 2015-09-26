@@ -14,7 +14,7 @@ describe "Router" do
 
 	context "when tested" do
 		it "calls correct parser" do
-			@banks = $Banks;
+			@banks = NgBankParser::Banks::BANK_DEFINITIONS;
 
 			# Choose a random bank and parser
 			random_bank = @banks.sample

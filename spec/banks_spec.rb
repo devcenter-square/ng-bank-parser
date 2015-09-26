@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Banks" do
-	subject { $Banks }
+	subject { NgBankParser::Banks::BANK_DEFINITIONS }
 
 	it { is_expected.to be_a_kind_of(Array) }
 	it { is_expected.not_to be_empty }
@@ -9,7 +9,7 @@ end
 
 
 describe "Every Bank" do
-	subject { $Banks }
+	subject { NgBankParser::Banks::BANK_DEFINITIONS }
 
 	it "is unique" do
 		expect(subject.length).to equal(subject.uniq.length)
@@ -38,7 +38,7 @@ describe "Every Bank" do
 	end
 end
 
-$Banks.each do |bank|
+NgBankParser::Banks::BANK_DEFINITIONS.each do |bank|
 	key = bank[:key].capitalize
 
 	bank[:parsers].each do |parser|
@@ -65,7 +65,7 @@ $Banks.each do |bank|
 				response = class_object.parse(invalid_file_path)
 
 				it "returns proper response" do
-					expect(response[:status]).to eq(0);
+					expect(response[:status]).to eq(400);
 				end
 			end
 
@@ -74,7 +74,7 @@ $Banks.each do |bank|
 				response = class_object.parse(valid_file_path, password)
 
 				it "parses statement correctly" do
-					expect(response[:status]).to eq(1)
+					expect(response[:status]).to eq(200)
 					expect(response[:data]).to match({
 						:bank_name => an_instance_of(String),
 						:account_number => an_instance_of(String),

@@ -1,6 +1,6 @@
 module NgBankParser
 	class Banks
-		$Banks = [{
+    BANK_DEFINITIONS = [{
 		    key: "gtb",
 		    name: "Guaranty Trust Bank",
 		    parsers: [{
