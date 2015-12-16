@@ -1,16 +1,14 @@
 require 'pdf-reader'
 require 'date'
 require 'open-uri'
-require 'securerandom'
 require_relative 'statement_utils'
 require_relative '../../pdf-unlocker.rb'
 
 module NgBankParser
 	module FirstbankPdfHelpers
 		include StatementUtils
-		
+
 		@@pdf_reader = nil
-		@@raw_transactions = [[]]
 		@@account_name = nil
 		@@account_number = nil
 		@@last_balance = nil
@@ -29,7 +27,6 @@ module NgBankParser
 
 		def get_unlocked_pdf? path, password
 			response = PDFUnlocker.unlock(path, password)
-
 			return false unless response
 			if response.include? 'Unlock Failed'
 				return false
@@ -40,26 +37,15 @@ module NgBankParser
 					@@pdf_reader = PDF::Reader.new(pseudo_file)
 					return true
 				rescue
-					return false					
+					return false
 				end
 			end
-		end
-
-
-		def get_raw_transactions
-			@@raw_transactions
 		end
 
 
 		def get_transaction_data
 			pages = get_pages @@pdf_reader
-			pages.each do |page|
-				page_text = get_page_text page
-				index = get_transaction_table_index page_text
-				unless index == -1
-					add_to_transactions page_text[index..-1]
-				end
-			end
+			get_all_transactions(pages)
 		end
 
 
@@ -104,7 +90,6 @@ module NgBankParser
 
 		def contains_transactions_table?
 			get_transaction_data
-			@@raw_transactions
 		end
 
 
@@ -173,10 +158,19 @@ module NgBankParser
 
 		private
 
-		def add_to_transactions lines
-			lines.each do |line|
-				@@raw_transactions << line.strip.split(/\s\s+/)
+		def get_all_transactions pages
+			raw_transactions = [[]]
+			pages.each do |page|
+				page_text = get_page_text page
+				index = get_transaction_table_index page_text
+				unless index == -1
+					lines = page_text[index..-1]
+					lines.each do |line|
+						raw_transactions << line.strip.split(/\s\s+/)
+					end
+				end
 			end
+			return raw_transactions
 		end
 
 	end

@@ -1,12 +1,11 @@
 require 'pdf-reader'
 require_relative 'firstbank-pdf-parser/helpers'
 
+
 module NgBankParser
 	class FirstbankPdf
 		extend FirstbankPdfHelpers
 
-		@@transactions = []
-		
 		def self.parse(path, password = nil)
 			accepted_formats = [".pdf"];
 			unless accepted_formats.include? File.extname(path)
@@ -29,15 +28,16 @@ module NgBankParser
 				return error_message 'Unable to read account details'
 			end
 
-			if contains_transactions_table?
-				extract_transactions(clean(get_raw_transactions))
+			raw_transactions = contains_transactions_table?
+			if raw_transactions
+				bdd = extract_transactions(clean(raw_transactions))
 				data = {}
 				data[:bank_name] = 'First Bank'
 				data[:account_number] = get_account_number
 				data[:account_name] = get_account_name
 				data[:from_date] = get_from_date
 				data[:to_date] = get_to_date
-				data[:transactions] = @@transactions
+				data[:transactions] = bdd
 				send_response data
 			else
 				return error_message 'Could not find any transactions'
@@ -47,6 +47,7 @@ module NgBankParser
 		private
 
 		def self.extract_transactions(jagged_array = [[]])
+			arr = []
 			jagged_array.each do |array|
 				if is_transaction_row? array
 					transaction = {}
@@ -62,11 +63,12 @@ module NgBankParser
 						transaction[:type] = 'debit'
 						update_last_balance transaction[:balance]
 					end
-					@@transactions << transaction
+					arr << transaction
 				else
-					@@transactions.last[:remarks] += array[0] if @@transactions
+					arr.last[:remarks] += array[0]
 				end
 			end
+			arr
 		end
 
 
