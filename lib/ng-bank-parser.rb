@@ -11,6 +11,4 @@ require_relative "ng-bank-parser/parsers/ecobank-pdf-parser"
 
 module NgBankParser
   # Your code goes here...
-  file_path = '/Users/onyekachi/dev/ruby/ng-bank-parser/lib/ng-bank-parser/fixtures/ecobank-pdf-valid.pdf'
-  @parser = NgBankParser::Router.parse("ecobank", file_path)
 end

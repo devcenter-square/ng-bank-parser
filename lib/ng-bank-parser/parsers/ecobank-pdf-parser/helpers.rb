@@ -76,11 +76,23 @@ module NgBankParser
             transaction_hash[:amount] = amount_to_f(transaction[4])
             transaction_hash[:balance] = amount_to_f(transaction[5])
           elsif transaction.count == 5
-            transaction_hash[:remarks] = transaction[2]
-            transaction_hash[:ref] = transaction[3]
-            amount_and_balance = transaction[4].split(" ")
-            transaction_hash[:amount] = amount_to_f(amount_and_balance[0])
-            transaction_hash[:balance] = amount_to_f(amount_and_balance[1])
+            if transaction[2].chars.first === "'"
+              transaction_hash[:remarks] = ""
+              transaction_hash[:ref] = transaction[2]
+              transaction_hash[:amount] = amount_to_f(transaction[3])
+              transaction_hash[:balance] = amount_to_f(transaction[4])
+            elsif transaction[2].split("'")[1]
+              transaction_hash[:remarks] = transaction[2].split("'")[0]
+              transaction_hash[:ref] = transaction[2].split("'")[1]
+              transaction_hash[:amount] = amount_to_f(transaction[3])
+              transaction_hash[:balance] = amount_to_f(transaction[4])
+            else
+              transaction_hash[:remarks] = transaction[2]
+              transaction_hash[:ref] = transaction[3]
+              amount_and_balance = transaction[4].split(" ")
+              transaction_hash[:amount] = amount_to_f(amount_and_balance[0])
+              transaction_hash[:balance] = amount_to_f(amount_and_balance[1])
+            end
           else 
             remarks_and_ref = transaction[2].split("'")
             transaction_hash[:remarks] = remarks_and_ref[0]
@@ -89,7 +101,7 @@ module NgBankParser
             transaction_hash[:amount] = amount_to_f(amount_and_balance[0])
             transaction_hash[:balance] = amount_to_f(amount_and_balance[1])
           end
-          
+
           transaction_hash[:type] = transaction_type(transaction_hash[:balance], opening_balance)
         
           opening_balance = transaction_hash[:balance]
