@@ -46,6 +46,15 @@ module NgBankParser
 						 invalid: "lib/ng-bank-parser/fixtures/accessbank-pdf-invalid.pdf",
 						 extensions: ["pdf"]
 				 }]
-	  	}]
+	  	},{
+				key: "ecobank",
+				name: "Ecobank Nigeria",
+				parsers: [{
+					format: "pdf",
+					valid: "lib/ng-bank-parser/fixtures/ecobank-pdf-valid.pdf",
+					invalid: "lib/ng-bank-parser/fixtures/ecobank-pdf-invalid.pdf",
+					extensions: ["pdf"]
+				}]
+			}]
 	end
 end
