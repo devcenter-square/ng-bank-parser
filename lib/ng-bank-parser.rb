@@ -10,5 +10,5 @@ require_relative "ng-bank-parser/parsers/accessbank-pdf-parser"
 require_relative "ng-bank-parser/parsers/ecobank-pdf-parser"
 
 module NgBankParser
-  # Your code goes here...
+  # Your code goes here... 
 end
