@@ -111,8 +111,6 @@ module AccessbankPdfHelpers
   end
 
 
-
-
   def error(msg)
     { status: 400, message: msg }
   end
@@ -120,7 +118,6 @@ module AccessbankPdfHelpers
   def success(data)
     { status: 200, data: data }
   end
-
 
 
   private
@@ -161,6 +158,7 @@ module AccessbankPdfHelpers
       Date.strptime(date_str, '%d-%b-%y')
     end
 
+    
     def string_with_slash_to_date(date_str)
       Date.strptime(date_str, '%d/%m/%Y')
     end

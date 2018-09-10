@@ -92,6 +92,14 @@ Heritage Bank:
 - key: hb
 - supported formats: pdf
 
+Access Bank:
+- key: accessbank
+- supported formats: pdf
+
+Ecobank:
+- key: ecobank
+- supported formats: pdf
+
 ## Contributing
 
 Documentation on contribution can be found in the contribution wiki
